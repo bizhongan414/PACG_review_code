@@ -1,0 +1,9 @@
+This distribution includes a modified veRL/EasyR1-style runtime from VPPO_RL.
+Original Apache-2.0 license and source copyright notices are retained in LICENSE
+and the vendored verl files. PACG training integration is in verl/trainer/pa_grpo.py
+and verl/workers/actor/dp_actor.py; VPPO logic is retained in the actor and image
+augmentation workers. This curated distribution removes private infrastructure
+and SRPO experiments and supplies portable launchers and standalone diagnostics.
+The shared backend retains compatibility utilities for other architectures and
+disabled optimizer extensions; these are not separate experimental releases.
+

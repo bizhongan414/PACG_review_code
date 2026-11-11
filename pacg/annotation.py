@@ -1,0 +1,189 @@
+"""Span-annotation prompt and JSON helpers extracted from the training implementation."""
+import base64
+import io
+import json
+import re
+import sys
+from pathlib import Path
+from typing import Any, Dict, List
+from PIL import Image
+
+def image_to_data_url(path: Path) -> str:
+    if not path.is_file():
+        raise FileNotFoundError(f"Image not found: {path}")
+    # Normalize transparent diagrams before sending them to an OpenAI-style
+    # endpoint.  Different server-side image decoders otherwise choose
+    # different alpha backgrounds, and a direct RGBA -> RGB conversion can
+    # produce an all-black image.
+    with Image.open(path) as image:
+        if image.mode in {"RGBA", "LA"} or "transparency" in image.info:
+            rgba = image.convert("RGBA")
+            white = Image.new("RGBA", rgba.size, (255, 255, 255, 255))
+            rgb = Image.alpha_composite(white, rgba).convert("RGB")
+        else:
+            rgb = image.convert("RGB")
+        buffer = io.BytesIO()
+        rgb.save(buffer, format="PNG")
+    encoded = base64.b64encode(buffer.getvalue()).decode("ascii")
+    return f"data:image/png;base64,{encoded}"
+
+def build_prompt(row: Dict[str, Any], trace: str, max_trace_chars: int) -> str:
+    annotation_input = {
+        "sample_id": row.get("sample_id"),
+        "question": row.get("question", ""),
+        "trace": trace[:max_trace_chars],
+    }
+    return f"""你是一个严格的多模态推理 span 标注器。你将同时看到用户问题、对应图像和模型生成的 reasoning trace。
+
+任务：识别 trace 中的 atomic reasoning spans，并判断哪些是 direct Visual Evidence-Functional (VEF) spans。不要判断最终答案是否正确，也不要把“视觉证据是否真实支持该 span”与“该 span 是否属于 direct VEF”混为一谈。
+
+## 核心原则
+- direct VEF 是一个**功能标签**，不是正确性标签。
+- 只要 span 的语义是在**声称直接来自当前图像/表格/OCR/空间布局的视觉信息**，它就可以是 direct VEF。
+- 即使这个视觉声称是错误的、幻觉的、与图像矛盾的，它仍然可以是 direct VEF。
+- 对 direct VEF，需再单独标注其与图像的关系：supported / contradicted / unknown。
+
+## direct VEF 必须同时满足
+1. text 是 trace 中逐字连续出现的最小完整命题。
+2. span 的功能是直接读取、描述或复述当前图像中的视觉/OCR/图表/计数/属性/空间/拓扑信息。
+3. 该命题不能仅由 question 文字直接获得，必须依赖当前图像或图表。
+4. span 本身是直接观察的断言，不包含计算、通用规则、物理/几何推导、选项分析或最终答案。
+5. span 不是假设条件，不是元话语，不只是复述选项。
+
+## 不属于 direct VEF
+- question 已经明确给出的事实；
+- 假设条件，例如 “If the particle is positively charged”；
+- 通用知识，例如 “the slope of a velocity-time graph gives acceleration”；
+- 数学计算、物理/几何推导、derived conclusion、选项判断和 final answer；
+- 不完整短语，例如 “point a to point b” 或 “from the graph”；
+- 纯符号推理、公式代入、答案格式内容；
+- 仅表示推理过程或方法的句子；
+- 关于“缺失、未提供、无法确定”的元判断，除非它直接描述图像中可见的空白、遮挡或缺失现象。
+
+## observation 与 inference 必须拆分
+“The velocity increases linearly, indicating a constant acceleration.” 应拆成：
+- “The velocity increases linearly” → direct_vef / ocr_chart 或 visual_relation
+- “indicating a constant acceleration” → derived_vef 或 symbolic_deduction
+
+## 缺失/未提供/无法确定的判断
+- 如果 span 只是说 “we don't have the value of y_5 directly provided”, “cannot be determined”, “not given”等，
+  这通常不是 direct VEF。
+- 只有当 span **直接描述图像里可见的空白、遮挡、缺失区域** 时，才可考虑 direct VEF。
+- 否则应标为 derived_vef、non_vef_control 或 other。
+
+## direct VEF 的支持状态
+对每个 direct VEF span，再判断它与当前图像的关系：
+- supported：图像明确支持该命题
+- contradicted：图像明确否定该命题
+- unsupported：span 声称直接来自图像，但图中找不到足够证据支持，且不能明确判为相反
+- unknown：图像证据不足，无法判断
+
+注意：
+- contradicted 的 span 仍然是 direct VEF；
+- supported / contradicted / unsupported / unknown 是证据状态，不是 VEF 类型本身。
+
+## 最终统计类别
+必须将“视觉依赖类型”和“与原图的一致性”分开判断：
+
+1. 直接依赖视觉 + 原图支持
+   → analysis_category = supported_direct_vef
+2. 直接依赖视觉 + 原图反驳或不支持
+   → analysis_category = hallucinated_or_unsupported_direct_vef
+3. 不直接依赖视觉
+   → analysis_category = non_vef_reasoning
+4. 间接依赖视觉，是从视觉观察继续推导的结论
+   → analysis_category = derived_vef
+5. 如果是 direct VEF，但图像不足以判断真假
+   → analysis_category = unknown_direct_vef
+
+假的、编造的或与原图矛盾的视觉声称不能漏掉。只要它在语义功能上声称直接读取当前图像，仍标 direct_vef，再用 evidence_status 和 analysis_category 表示它不受原图支持。
+
+## 标签
+span_group: direct_vef, derived_vef, non_vef_control, other
+function_type: visual_relation, spatial_topology, ocr_chart, counting_attribute, uncertainty, cross_modal_verification, derived_vef, symbolic_deduction, answer_formatting, other
+assertion_status: asserted, hypothetical, uncertain, quoted_option
+
+## 标注原则
+- Precision first；不确定时不要标 direct VEF。
+- span text 必须是 trace 的 exact substring，不能改写、翻译或修改 LaTeX。
+- span 尽可能短，但必须是完整、可独立理解的命题。
+- 不要求覆盖整个 trace，最多输出 30 个 spans。
+- 不要使用 gold answer；不要参考已有 Kimi/Qwen spans。
+
+## direct VEF 判断规则
+在输出任何 direct VEF span 前，执行以下检查：
+1. 该 span 是否在声称“看到/读到/数到/识别到”当前图像中的信息？
+2. 该 span 是否只是复述 question 或选项？
+3. 该 span 是否同时包含“看到什么”和“由此推出什么”？
+4. 该 span 是否包含 therefore, thus, hence, indicating, implying, so, which means 等推理词？
+5. 删除 span 后半部分，前半部分是否已经构成完整视觉观察？
+
+## 输出要求
+直接输出JSON格式，不要输出markdown格式。
+JSON 格式:
+{{
+  "sample_id": "...",
+  "spans": [
+    {{
+      "text": "exact substring",
+      "span_group": "direct_vef",
+      "function_type": "ocr_chart",
+      "is_vef": true,
+      "vef_role": "direct",
+      "visual_dependency": "direct",
+      "evidence_status": "supported",
+      "analysis_category": "supported_direct_vef",
+      "claim_polarity": "positive",
+      "confidence": 0.95,
+      "evidence_in_question_text": false,
+      "requires_current_image": true,
+      "contains_inference": false,
+      "assertion_status": "asserted",
+      "rationale": "brief reason"
+    }}
+  ]
+}}
+
+待标注样本：
+{json.dumps(annotation_input, ensure_ascii=False)}
+"""
+
+def parse_json_content(content: str) -> Dict[str, Any]:
+    text = content.strip()
+    text = re.sub(r"^```(?:json)?\s*", "", text, flags=re.I)
+    text = re.sub(r"\s*```$", "", text)
+    # 有些模型会在 JSON 后面追加分析文本，只提取第一个完整 JSON 对象
+    match = re.search(r"\{.*\}", text, re.DOTALL)
+    if match:
+        try:
+            return json.loads(match.group(0))
+        except json.JSONDecodeError:
+            pass
+    return json.loads(text)
+
+def alignment_summary(trace: str, parsed: Dict[str, Any]) -> List[Dict[str, Any]]:
+    aligned: List[Dict[str, Any]] = []
+    cursor = 0
+    for index, span in enumerate(parsed.get("spans", [])):
+        text = str(span.get("text", ""))
+        start = trace.find(text, cursor)
+        method = "cursor_exact"
+        if start < 0:
+            start = trace.find(text)
+            method = "global_exact"
+        end = start + len(text) if start >= 0 else None
+        if start >= 0:
+            cursor = end
+        aligned.append({
+            "span_index": index,
+            "text": text,
+            "char_start": start if start >= 0 else None,
+            "char_end": end,
+            "alignment_method": method if start >= 0 else "not_found",
+        })
+    return aligned
+
+def load_helpers():
+    from types import SimpleNamespace
+    return SimpleNamespace(build_prompt=build_prompt, parse_json_content=parse_json_content,
+                           image_to_data_url=image_to_data_url, alignment_summary=alignment_summary)

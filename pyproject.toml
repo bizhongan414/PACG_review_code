@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pacg-rl"
+version = "0.1.0"
+description = "Persistence-aware credit gating and fixed-rollout visual diagnostics"
+requires-python = ">=3.10,<3.13"
+dependencies = [
+  "accelerate", "codetiming", "datasets", "jinja2", "mathruler", "numpy",
+  "omegaconf==2.3.0", "pandas", "peft", "pillow", "pyarrow>=15",
+  "pylatexenc", "qwen-vl-utils", "ray[default]", "requests", "tensordict",
+  "tensorboard", "torch>=2.5", "torchdata", "transformers>=4.54,<=4.57.0",
+  "einops", "packaging", "psutil", "pyyaml", "filelock",
+]
+
+[project.optional-dependencies]
+train = ["vllm>=0.8", "flash-attn>=2.4.3", "liger-kernel"]
+
+[tool.setuptools.packages.find]
+include = ["pacg*", "verl*"]
+

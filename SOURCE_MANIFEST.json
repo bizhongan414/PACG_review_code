@@ -1,0 +1,534 @@
+{
+  "source": "VPPO_RL (local source snapshot)",
+  "scope": "GRPO/DAPO/VPPO + PACG runtime, annotation and SPD diagnostics",
+  "files": [
+    {
+      "path": ".gitignore",
+      "origin": "adapted",
+      "sha256": "c4667455a8d3c63dfcf60c0c30aff1a86d981bc53a01ba04b4909edaa474195e",
+      "source_sha256": "7f81c08367338f05743349d83a7b45c270b94dfaefb0ecdd1cd307b5330cdd39"
+    },
+    {
+      "path": "DIAGNOSTICS.md",
+      "origin": "new",
+      "sha256": "8bbce117f625b9979277f2a120266b9e4985e1613968b682280f160c5dafc6cb"
+    },
+    {
+      "path": "LICENSE",
+      "origin": "copied",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "source_sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "path": "NOTICE",
+      "origin": "new",
+      "sha256": "d5db671c3574a425cb14776411aedd14d38d06d35978d327edd40346ac2c5419"
+    },
+    {
+      "path": "README.md",
+      "origin": "adapted",
+      "sha256": "5852703fcaed7e0565731120ee343a6e954ebffbd8e11ba5a72d1da8233f3286",
+      "source_sha256": "9074b6dc41f18e7d91129c1c2b5c82b6541365eb0996e641c5e8de5fa821207f"
+    },
+    {
+      "path": "VALIDATION.md",
+      "origin": "new",
+      "sha256": "e759e10bedf3e3dfd2b4525a158c5d9d5969dbc595b401bc36a9c715059d4c15"
+    },
+    {
+      "path": "examples/configs/pacg_7b.yaml",
+      "origin": "new",
+      "sha256": "1f015569ed3059a4b14038fed950d0cb5b73422e8712f955d3cb6bf4180e6242"
+    },
+    {
+      "path": "examples/format_prompt/math_format_perception.jinja",
+      "origin": "adapted",
+      "sha256": "91d41387c641712d90d5684ccb14b6bfd373b5ce6aff78c0010fb00af5ff8508",
+      "source_sha256": "4b204150d4cf07cdc787390b4fc8a494150c417dc386990c4f456e792318fa60"
+    },
+    {
+      "path": "pacg/__init__.py",
+      "origin": "new",
+      "sha256": "0368cb3084fe7a08a0609f16431329132bf2dc8813af69beed3d691c7f9435b7"
+    },
+    {
+      "path": "pacg/annotate.py",
+      "origin": "new",
+      "sha256": "4687d6d187734fed36f43f558ed6ee76b0ee289a55c61c7ab6228f35865dfc8c"
+    },
+    {
+      "path": "pacg/annotation.py",
+      "origin": "new",
+      "sha256": "1e3356a9c1cb0be7df2018eb44b865b1ec5e38592d93a5573b6a9ded8d79addb"
+    },
+    {
+      "path": "pacg/diagnose.py",
+      "origin": "new",
+      "sha256": "62b0a0ed806827db295ac2c23995a1c30fdb622e29f4f1537e681c7615aa73d0"
+    },
+    {
+      "path": "pacg/evaluate.py",
+      "origin": "new",
+      "sha256": "93cdafba7ff983630c2fa49af6e1b1576ac54b8842cee01f337f88e127f0b371"
+    },
+    {
+      "path": "pacg/metrics.py",
+      "origin": "new",
+      "sha256": "5e3fc8ef0eef640e4172d216967141604b5b927b1c2ee7d1bd768937e173361d"
+    },
+    {
+      "path": "pacg/preflight.py",
+      "origin": "new",
+      "sha256": "b9c280d62d02f5cdf18f7d6b17d5d692616343ca87737cbd621261fb4afc08c0"
+    },
+    {
+      "path": "pacg/reference.py",
+      "origin": "new",
+      "sha256": "10479917ea007ebbdedc287c6ff6e79b29628451b00f6982fb6a1727b248fb17"
+    },
+    {
+      "path": "pacg/report.py",
+      "origin": "new",
+      "sha256": "4d97d3750056873651544263972d3c4db040fd2cda17ae8a07a2055c46e5db7d"
+    },
+    {
+      "path": "pacg/reward.py",
+      "origin": "new",
+      "sha256": "116ee97c24632423d6f8182d2778300a9f50edae0b4474ebb6eb9174c63ed2aa"
+    },
+    {
+      "path": "prompts/visual_claim_annotation.txt",
+      "origin": "new",
+      "sha256": "f11ef1bb395f97f57353f1ff3fdffbd159db5fd18a86604d733d932ef7a36dcf"
+    },
+    {
+      "path": "pyproject.toml",
+      "origin": "adapted",
+      "sha256": "d2916f39e85bbaf1c0e0227bb18bc3c5347db033ca788f2033883a5abbfc55e1",
+      "source_sha256": "3e38c2149400aa1221e4b1e0808da5ca5e0535f7e055acb50caa214e4fc9a2e6"
+    },
+    {
+      "path": "scripts/deploy_span_annotator.sh",
+      "origin": "new",
+      "sha256": "91d9fc8e54aafe25f6d32e33218692e61887152e88e57843d1be9b809feb6d45"
+    },
+    {
+      "path": "scripts/model_merger.py",
+      "origin": "adapted",
+      "sha256": "38a961667f2b23c2d7e41cc0c5477b482760383d9b683e0ffe8187a2d2031d9e",
+      "source_sha256": "2d940bf0d28eff5695a84b019f113d8441a48462aaf0b2299260c04533d92ba0"
+    },
+    {
+      "path": "scripts/train_qwen25vl7b.sh",
+      "origin": "new",
+      "sha256": "e491b581c12031b95cdc1a45fc94535c4cfadc3006a1a7716a6914ae599ab71d"
+    },
+    {
+      "path": "tests/test_pa_annotation_pipeline.py",
+      "origin": "copied",
+      "sha256": "ca713cdf60b949e0867d672195e842d31c67ee5dba52b919746397cf992b6a7d",
+      "source_sha256": "ca713cdf60b949e0867d672195e842d31c67ee5dba52b919746397cf992b6a7d"
+    },
+    {
+      "path": "tests/test_release.py",
+      "origin": "new",
+      "sha256": "f2a685439845831d22c27e94f37608ee65d5937e933233628640a76ed434db4d"
+    },
+    {
+      "path": "verl/__init__.py",
+      "origin": "copied",
+      "sha256": "71e3d6e8033cdaa74d9a0e7725c838f979a89f70446e4037ad8441d06710dada",
+      "source_sha256": "71e3d6e8033cdaa74d9a0e7725c838f979a89f70446e4037ad8441d06710dada"
+    },
+    {
+      "path": "verl/models/__init__.py",
+      "origin": "copied",
+      "sha256": "e65abd77db034b4f29eb1268c24867f84919dbce22e28d1997e563ed1d94179c",
+      "source_sha256": "e65abd77db034b4f29eb1268c24867f84919dbce22e28d1997e563ed1d94179c"
+    },
+    {
+      "path": "verl/models/monkey_patch.py",
+      "origin": "copied",
+      "sha256": "235f15787033941179df2380aa586c1de1af90444fedcf4e2ff4da3eb5d4c08b",
+      "source_sha256": "235f15787033941179df2380aa586c1de1af90444fedcf4e2ff4da3eb5d4c08b"
+    },
+    {
+      "path": "verl/models/transformers/__init__.py",
+      "origin": "copied",
+      "sha256": "e65abd77db034b4f29eb1268c24867f84919dbce22e28d1997e563ed1d94179c",
+      "source_sha256": "e65abd77db034b4f29eb1268c24867f84919dbce22e28d1997e563ed1d94179c"
+    },
+    {
+      "path": "verl/models/transformers/cfpo.py",
+      "origin": "copied",
+      "sha256": "d1bd5a85697d00a11047ce753f7893c2fbdd92a318c48a351b15929d438d2cf9",
+      "source_sha256": "d1bd5a85697d00a11047ce753f7893c2fbdd92a318c48a351b15929d438d2cf9"
+    },
+    {
+      "path": "verl/models/transformers/flash_attention_utils.py",
+      "origin": "copied",
+      "sha256": "a7ea51bb60f220aa00f46c25ebd8bee3f35fe7d47bdfd547d34a36366231b9be",
+      "source_sha256": "a7ea51bb60f220aa00f46c25ebd8bee3f35fe7d47bdfd547d34a36366231b9be"
+    },
+    {
+      "path": "verl/models/transformers/qwen2_vl.py",
+      "origin": "copied",
+      "sha256": "38ca4470f7250106a1ec24999128f6bc3b59493ffb4a794e821481aea794e06d",
+      "source_sha256": "38ca4470f7250106a1ec24999128f6bc3b59493ffb4a794e821481aea794e06d"
+    },
+    {
+      "path": "verl/models/transformers/qwen3_vl.py",
+      "origin": "copied",
+      "sha256": "84702e3f5a795e061e87ad269e48d7ec5c5061d7b852cabcced2799815b65244",
+      "source_sha256": "84702e3f5a795e061e87ad269e48d7ec5c5061d7b852cabcced2799815b65244"
+    },
+    {
+      "path": "verl/protocol.py",
+      "origin": "copied",
+      "sha256": "a634340a086a986c03c96ad27c58da3df792ad4ebd09741c9109d689e2cfebd1",
+      "source_sha256": "a634340a086a986c03c96ad27c58da3df792ad4ebd09741c9109d689e2cfebd1"
+    },
+    {
+      "path": "verl/single_controller/__init__.py",
+      "origin": "copied",
+      "sha256": "e65abd77db034b4f29eb1268c24867f84919dbce22e28d1997e563ed1d94179c",
+      "source_sha256": "e65abd77db034b4f29eb1268c24867f84919dbce22e28d1997e563ed1d94179c"
+    },
+    {
+      "path": "verl/single_controller/base/__init__.py",
+      "origin": "copied",
+      "sha256": "54c1bcd50ca1c03e4e08d38208bec3db525eaaf46a987b83d032a316d488c1e4",
+      "source_sha256": "54c1bcd50ca1c03e4e08d38208bec3db525eaaf46a987b83d032a316d488c1e4"
+    },
+    {
+      "path": "verl/single_controller/base/decorator.py",
+      "origin": "copied",
+      "sha256": "2fe8e039eade8d92390d09a4fb1526183f4c110566825452b15e39843e9d3add",
+      "source_sha256": "2fe8e039eade8d92390d09a4fb1526183f4c110566825452b15e39843e9d3add"
+    },
+    {
+      "path": "verl/single_controller/base/register_center/__init__.py",
+      "origin": "copied",
+      "sha256": "e65abd77db034b4f29eb1268c24867f84919dbce22e28d1997e563ed1d94179c",
+      "source_sha256": "e65abd77db034b4f29eb1268c24867f84919dbce22e28d1997e563ed1d94179c"
+    },
+    {
+      "path": "verl/single_controller/base/register_center/ray.py",
+      "origin": "copied",
+      "sha256": "7c0a3ea7a3f49b4bbd0a5b0f51136b160dca09cdfded5f52ed4d72aa011bce1e",
+      "source_sha256": "7c0a3ea7a3f49b4bbd0a5b0f51136b160dca09cdfded5f52ed4d72aa011bce1e"
+    },
+    {
+      "path": "verl/single_controller/base/worker.py",
+      "origin": "copied",
+      "sha256": "ecbbe21a48dd6133700d2028e720eb26870683a0439d8499b43a44bd6486fb99",
+      "source_sha256": "ecbbe21a48dd6133700d2028e720eb26870683a0439d8499b43a44bd6486fb99"
+    },
+    {
+      "path": "verl/single_controller/base/worker_group.py",
+      "origin": "copied",
+      "sha256": "3c3ab71b7d4e18ace6e150585fe3b2134a4419059089885874067fa35962fc90",
+      "source_sha256": "3c3ab71b7d4e18ace6e150585fe3b2134a4419059089885874067fa35962fc90"
+    },
+    {
+      "path": "verl/single_controller/ray/__init__.py",
+      "origin": "copied",
+      "sha256": "5fc70fda13efb9a61e43b268b93cc3ce7fd48988e34d59d9a8fd520d7aa8ec72",
+      "source_sha256": "5fc70fda13efb9a61e43b268b93cc3ce7fd48988e34d59d9a8fd520d7aa8ec72"
+    },
+    {
+      "path": "verl/single_controller/ray/base.py",
+      "origin": "copied",
+      "sha256": "039982ab0d10549df648427f10b945860c1b8260195faa9552f6336c809a49ab",
+      "source_sha256": "039982ab0d10549df648427f10b945860c1b8260195faa9552f6336c809a49ab"
+    },
+    {
+      "path": "verl/trainer/__init__.py",
+      "origin": "copied",
+      "sha256": "e65abd77db034b4f29eb1268c24867f84919dbce22e28d1997e563ed1d94179c",
+      "source_sha256": "e65abd77db034b4f29eb1268c24867f84919dbce22e28d1997e563ed1d94179c"
+    },
+    {
+      "path": "verl/trainer/config.py",
+      "origin": "adapted",
+      "sha256": "d832217159458ab6659056587b3e012605c59fb31a28b631f29eadd1f2f91360",
+      "source_sha256": "54c31d8b0b55bd9d393a14b61677c26d2774b20b58c1f0dc2122b98405d756d6"
+    },
+    {
+      "path": "verl/trainer/core_algos.py",
+      "origin": "copied",
+      "sha256": "83f77b39214d8ff106bd1e2d69eddf31b5d4eca57ba060cee23676187920ba3b",
+      "source_sha256": "83f77b39214d8ff106bd1e2d69eddf31b5d4eca57ba060cee23676187920ba3b"
+    },
+    {
+      "path": "verl/trainer/data_loader.py",
+      "origin": "copied",
+      "sha256": "fc76a3fd43fbc8ea5aed4f5a84db3076cbdc0e8a819ba56af60064a656a149b0",
+      "source_sha256": "fc76a3fd43fbc8ea5aed4f5a84db3076cbdc0e8a819ba56af60064a656a149b0"
+    },
+    {
+      "path": "verl/trainer/main.py",
+      "origin": "adapted",
+      "sha256": "6a5681d97a1ae845522dcd102bf5fe2fd093782f71fc025b48ee397f8931d559",
+      "source_sha256": "95ef8c77c62ceee94d083ae53cc0006270d5498e30796f6f233a20c14ff30ac4"
+    },
+    {
+      "path": "verl/trainer/metrics.py",
+      "origin": "copied",
+      "sha256": "64982c9586860fb0837347ee2399e51bcf2888dc25e189e01af54b6d613ee4da",
+      "source_sha256": "64982c9586860fb0837347ee2399e51bcf2888dc25e189e01af54b6d613ee4da"
+    },
+    {
+      "path": "verl/trainer/pa_grpo.py",
+      "origin": "adapted",
+      "sha256": "2b17fc83c355ca4c48de33bf5790b787519aa7f6c7603ea03ef001edab0b2cfc",
+      "source_sha256": "3c5f04e577fde0f941f10dd67a36b88c9be8a38475daa3f557c37da048e7d865"
+    },
+    {
+      "path": "verl/trainer/ray_trainer.py",
+      "origin": "adapted",
+      "sha256": "b36bb0118c5683ad1ac82aa4e9f71c0ff37dd9ab98b22a9cbacf154f067f106a",
+      "source_sha256": "8a0a0039b2efd6d6885f92decebdffd76aa989caa45c180d866f4f7fbe33193e"
+    },
+    {
+      "path": "verl/utils/__init__.py",
+      "origin": "copied",
+      "sha256": "e65abd77db034b4f29eb1268c24867f84919dbce22e28d1997e563ed1d94179c",
+      "source_sha256": "e65abd77db034b4f29eb1268c24867f84919dbce22e28d1997e563ed1d94179c"
+    },
+    {
+      "path": "verl/utils/checkpoint/__init__.py",
+      "origin": "copied",
+      "sha256": "af3f01995bb99df376811b5674c2fa3ccc91855ce46ee71d926a1721380c3c92",
+      "source_sha256": "af3f01995bb99df376811b5674c2fa3ccc91855ce46ee71d926a1721380c3c92"
+    },
+    {
+      "path": "verl/utils/checkpoint/checkpoint_manager.py",
+      "origin": "copied",
+      "sha256": "af20ef83b0289591dbd1ccbd91c46dc4a4aadf0094bd6f89edfd743c39f4904f",
+      "source_sha256": "af20ef83b0289591dbd1ccbd91c46dc4a4aadf0094bd6f89edfd743c39f4904f"
+    },
+    {
+      "path": "verl/utils/checkpoint/fsdp_checkpoint_manager.py",
+      "origin": "copied",
+      "sha256": "8fed9058efeef85c8668535876b83428b8425f584304155bc79f78ebba40aec6",
+      "source_sha256": "8fed9058efeef85c8668535876b83428b8425f584304155bc79f78ebba40aec6"
+    },
+    {
+      "path": "verl/utils/dataset.py",
+      "origin": "copied",
+      "sha256": "31842151d3302ab516f63fd881250fb43b3cb9f3a0a6ffa7af16a7f2fbf18819",
+      "source_sha256": "31842151d3302ab516f63fd881250fb43b3cb9f3a0a6ffa7af16a7f2fbf18819"
+    },
+    {
+      "path": "verl/utils/flops_counter.py",
+      "origin": "copied",
+      "sha256": "0b0121aeacd46cc29d721ea738f5fa5b1dde4866418b4c6de056f7cfce7574a6",
+      "source_sha256": "0b0121aeacd46cc29d721ea738f5fa5b1dde4866418b4c6de056f7cfce7574a6"
+    },
+    {
+      "path": "verl/utils/fsdp_utils.py",
+      "origin": "copied",
+      "sha256": "63a1d291cbbdc387ce0720b37619be5be196fba9f2cc6ee271494152a8fc2797",
+      "source_sha256": "63a1d291cbbdc387ce0720b37619be5be196fba9f2cc6ee271494152a8fc2797"
+    },
+    {
+      "path": "verl/utils/logger/__init__.py",
+      "origin": "copied",
+      "sha256": "1139d6b27e3b16de699fbfb62af96996929975179ca2ee8f6f7440b5592aa9aa",
+      "source_sha256": "1139d6b27e3b16de699fbfb62af96996929975179ca2ee8f6f7440b5592aa9aa"
+    },
+    {
+      "path": "verl/utils/logger/gen_logger.py",
+      "origin": "copied",
+      "sha256": "a34fc8761b5ddc3a02c3b368f1bae8b3f0b53cfb11fda8e294fc6e844c0ea95a",
+      "source_sha256": "a34fc8761b5ddc3a02c3b368f1bae8b3f0b53cfb11fda8e294fc6e844c0ea95a"
+    },
+    {
+      "path": "verl/utils/logger/logger.py",
+      "origin": "copied",
+      "sha256": "bef8fddc63d378770766fdba1f39937a98359e1f1c887084d970170933d91d24",
+      "source_sha256": "bef8fddc63d378770766fdba1f39937a98359e1f1c887084d970170933d91d24"
+    },
+    {
+      "path": "verl/utils/model_utils.py",
+      "origin": "copied",
+      "sha256": "fb83e18b441b1de34c04b9798d58ba8dbc49df84466aab998db0826fd2cbf316",
+      "source_sha256": "fb83e18b441b1de34c04b9798d58ba8dbc49df84466aab998db0826fd2cbf316"
+    },
+    {
+      "path": "verl/utils/py_functional.py",
+      "origin": "copied",
+      "sha256": "a9b93bbe52d7b2b9929a68db413f4eb670452556c454b1552409e8f6dd526cc1",
+      "source_sha256": "a9b93bbe52d7b2b9929a68db413f4eb670452556c454b1552409e8f6dd526cc1"
+    },
+    {
+      "path": "verl/utils/seqlen_balancing.py",
+      "origin": "copied",
+      "sha256": "f1319a58338d64cbdbfffb9f881e2fe484cffc2b405fe078d0835985b412169d",
+      "source_sha256": "f1319a58338d64cbdbfffb9f881e2fe484cffc2b405fe078d0835985b412169d"
+    },
+    {
+      "path": "verl/utils/tokenizer.py",
+      "origin": "copied",
+      "sha256": "d32cdd6396ee448b48d84d5d90db90642de81f5203ebc3a3200cd8e1e99dc890",
+      "source_sha256": "d32cdd6396ee448b48d84d5d90db90642de81f5203ebc3a3200cd8e1e99dc890"
+    },
+    {
+      "path": "verl/utils/torch_dtypes.py",
+      "origin": "copied",
+      "sha256": "c3bb3c5d061b364ba412f927a82775cdca6205380d8ecbc25548f938be0fd30f",
+      "source_sha256": "c3bb3c5d061b364ba412f927a82775cdca6205380d8ecbc25548f938be0fd30f"
+    },
+    {
+      "path": "verl/utils/torch_functional.py",
+      "origin": "copied",
+      "sha256": "46fed3131cc20adcf8ecd5f505842976b2e9a40290f50b58cb1dd6300c3799c9",
+      "source_sha256": "46fed3131cc20adcf8ecd5f505842976b2e9a40290f50b58cb1dd6300c3799c9"
+    },
+    {
+      "path": "verl/utils/ulysses.py",
+      "origin": "copied",
+      "sha256": "9ab1d44fec1a1cb985263a87933a731bf93b818f3ce2f785079c8b0aa50837b0",
+      "source_sha256": "9ab1d44fec1a1cb985263a87933a731bf93b818f3ce2f785079c8b0aa50837b0"
+    },
+    {
+      "path": "verl/workers/__init__.py",
+      "origin": "copied",
+      "sha256": "e65abd77db034b4f29eb1268c24867f84919dbce22e28d1997e563ed1d94179c",
+      "source_sha256": "e65abd77db034b4f29eb1268c24867f84919dbce22e28d1997e563ed1d94179c"
+    },
+    {
+      "path": "verl/workers/actor/__init__.py",
+      "origin": "copied",
+      "sha256": "fd3fc174b81b2f10b2a78e43f0b652405fff2a59ec25ebb8856493b505369ed3",
+      "source_sha256": "fd3fc174b81b2f10b2a78e43f0b652405fff2a59ec25ebb8856493b505369ed3"
+    },
+    {
+      "path": "verl/workers/actor/base.py",
+      "origin": "copied",
+      "sha256": "d2fe132edff46e673e7c338615edd880efc7c347c16dde1cafbe063dd4318d01",
+      "source_sha256": "d2fe132edff46e673e7c338615edd880efc7c347c16dde1cafbe063dd4318d01"
+    },
+    {
+      "path": "verl/workers/actor/config.py",
+      "origin": "adapted",
+      "sha256": "e3cfccd1fdcef67cd216deb90149c7b46692c6ea6c2ba9e98fd75043e99c1867",
+      "source_sha256": "3f750d9254ea6d1aa358e9b7346a8d325e8204eb766d49f55e6d276e8d413c47"
+    },
+    {
+      "path": "verl/workers/actor/dp_actor.py",
+      "origin": "adapted",
+      "sha256": "784f1617dd245ed6caea6c3f8b31c0bd27e57afb3975ee19764a59cb686e51b4",
+      "source_sha256": "a0926d83a94165f322a8f034e110863f2e3a7f3df1052b601d58d91dcc345909"
+    },
+    {
+      "path": "verl/workers/config.py",
+      "origin": "copied",
+      "sha256": "268c85c392863253d541303958b5cdb352b9996e523d8963b129a4e7c8d53307",
+      "source_sha256": "268c85c392863253d541303958b5cdb352b9996e523d8963b129a4e7c8d53307"
+    },
+    {
+      "path": "verl/workers/critic/__init__.py",
+      "origin": "copied",
+      "sha256": "bb434041e7522163ce3ca2bbda2ce330fd2fffad0f95524f061cd0df64a70208",
+      "source_sha256": "bb434041e7522163ce3ca2bbda2ce330fd2fffad0f95524f061cd0df64a70208"
+    },
+    {
+      "path": "verl/workers/critic/base.py",
+      "origin": "copied",
+      "sha256": "d3d3cddc85e8da64dbc3cd256fd50a02f518da3a9cb15d2eebd9a14894113f48",
+      "source_sha256": "d3d3cddc85e8da64dbc3cd256fd50a02f518da3a9cb15d2eebd9a14894113f48"
+    },
+    {
+      "path": "verl/workers/critic/config.py",
+      "origin": "copied",
+      "sha256": "79c8641a766c3f611a55110d4cf4f140b95e9f606efa214d26df45c37c4402c8",
+      "source_sha256": "79c8641a766c3f611a55110d4cf4f140b95e9f606efa214d26df45c37c4402c8"
+    },
+    {
+      "path": "verl/workers/critic/dp_critic.py",
+      "origin": "copied",
+      "sha256": "7e597acdeff0082f04b64e33f797e3adbe31a1229e225d3491bff57f8b80dd8f",
+      "source_sha256": "7e597acdeff0082f04b64e33f797e3adbe31a1229e225d3491bff57f8b80dd8f"
+    },
+    {
+      "path": "verl/workers/fsdp_workers.py",
+      "origin": "adapted",
+      "sha256": "c8f16791334c8a4dab4cdabeaebf3edae072c9a83c2d1282fc4d0d7de4ecd0d4",
+      "source_sha256": "39c0ca3c5e6fb2b7a270f3d96ddea60d3efdc3d0995d8d53aaac0de2b8d0ee44"
+    },
+    {
+      "path": "verl/workers/perc_utils.py",
+      "origin": "copied",
+      "sha256": "10888858fdd97dbb17e2be16cdf754d6909646bb17c153a1ed7cf8ca2f502a51",
+      "source_sha256": "10888858fdd97dbb17e2be16cdf754d6909646bb17c153a1ed7cf8ca2f502a51"
+    },
+    {
+      "path": "verl/workers/reward/__init__.py",
+      "origin": "adapted",
+      "sha256": "518f1d3836d189bdaa1b76895c0bd5c2e71776c45055cafcc571bbe6800a961d",
+      "source_sha256": "6b51f3050a62cda9ad396592ec4328da1b91a91ed8caaf10f88ebfdda7c5084e"
+    },
+    {
+      "path": "verl/workers/reward/config.py",
+      "origin": "copied",
+      "sha256": "bb3795c17720a7f7017a73541e2583e4e75a0fa5919c990467ce11617cfb11a3",
+      "source_sha256": "bb3795c17720a7f7017a73541e2583e4e75a0fa5919c990467ce11617cfb11a3"
+    },
+    {
+      "path": "verl/workers/reward/function.py",
+      "origin": "copied",
+      "sha256": "821819038f281d3013f7b2ab7614f7aa011cc2160ba8f88a9bfc6a0c9789727d",
+      "source_sha256": "821819038f281d3013f7b2ab7614f7aa011cc2160ba8f88a9bfc6a0c9789727d"
+    },
+    {
+      "path": "verl/workers/rollout/__init__.py",
+      "origin": "adapted",
+      "sha256": "a23d22f35cda69a26b4e53e473ae42fd66db13d5bbe7a9f752f1daeb7d9ca685",
+      "source_sha256": "c6cb40fd12bcbf04fe8c9bef9f1669adec38f6a09956682a35cac4e6dc594560"
+    },
+    {
+      "path": "verl/workers/rollout/base.py",
+      "origin": "copied",
+      "sha256": "7cf5fe139d23f17ef028d71fc528425de061a6842ed6f74cfe0c7db49b7fd00d",
+      "source_sha256": "7cf5fe139d23f17ef028d71fc528425de061a6842ed6f74cfe0c7db49b7fd00d"
+    },
+    {
+      "path": "verl/workers/rollout/config.py",
+      "origin": "copied",
+      "sha256": "2d76cf77f02024f3326e9e24f970944ab26896e0fb00ea0af5f58a37c0e8171b",
+      "source_sha256": "2d76cf77f02024f3326e9e24f970944ab26896e0fb00ea0af5f58a37c0e8171b"
+    },
+    {
+      "path": "verl/workers/rollout/vllm_rollout_spmd.py",
+      "origin": "copied",
+      "sha256": "43221b44dfa4ad102ee89379599de10b69797182e74365d5d06bdbbf8a75db33",
+      "source_sha256": "43221b44dfa4ad102ee89379599de10b69797182e74365d5d06bdbbf8a75db33"
+    },
+    {
+      "path": "verl/workers/sharding_manager/__init__.py",
+      "origin": "copied",
+      "sha256": "d736c2258db98c57fa97613b0128268e438cfd48ed309ebc8decdf1947d40bce",
+      "source_sha256": "d736c2258db98c57fa97613b0128268e438cfd48ed309ebc8decdf1947d40bce"
+    },
+    {
+      "path": "verl/workers/sharding_manager/base.py",
+      "origin": "copied",
+      "sha256": "e7f8645a6e4b34dac2e19229bb0c18e5f1de4993fbcb7f84640ef1e6244d15c2",
+      "source_sha256": "e7f8645a6e4b34dac2e19229bb0c18e5f1de4993fbcb7f84640ef1e6244d15c2"
+    },
+    {
+      "path": "verl/workers/sharding_manager/fsdp_ulysses.py",
+      "origin": "copied",
+      "sha256": "dd3a8b3252787f3a711396e5015b24b3ea44a452db21f85c8680efa78646d64b",
+      "source_sha256": "dd3a8b3252787f3a711396e5015b24b3ea44a452db21f85c8680efa78646d64b"
+    },
+    {
+      "path": "verl/workers/sharding_manager/fsdp_vllm.py",
+      "origin": "copied",
+      "sha256": "d83f8e37754c5f0a541af7e78cde78afa2de6321845bc9fbed00087c2a446120",
+      "source_sha256": "d83f8e37754c5f0a541af7e78cde78afa2de6321845bc9fbed00087c2a446120"
+    }
+  ]
+}
